@@ -13,6 +13,7 @@
 
             <nav class="hidden md:flex items-center gap-1 p-1.5 bg-slate-100/50 rounded-2xl border border-slate-200/60">
                 @php
+                    // $roleName = auth()->user()->roles->first()?->name;
                     $navs = [
                         ['label' => 'Accueil', 'url' => '/home', 'active' => request()->is('home')],
                         ['label' => 'Catégories', 'url' => '/categories', 'active' => request()->is('categories')],
@@ -43,14 +44,13 @@
 
                             @php
                                 $roleName = auth()->user()->role->name ?? 'Viewer'; 
-                                $roleColor = match(strtolower($roleName)) {
+                                $roleColor = match(strtolower(auth()->user()->roles->first()->name)) {
                                     'admin' => 'bg-rose-100 text-rose-600 border-rose-200',
-                                    'editor' => 'bg-amber-100 text-amber-600 border-amber-200',
-                                    default => 'bg-blue-100 text-blue-600 border-blue-200',
+                                    'user' => 'bg-amber-100 text-amber-600 border-amber-200'
                                 };
                             @endphp
                             <span class="px-2 py-0.5 text-[10px] font-black uppercase tracking-tighter rounded-md border {{ $roleColor }}">
-                                {{ $roleName }}
+                                {{ auth()->user()->roles->first()->name }}
                             </span>
                         </div>
                         <p class="text-[10px] text-slate-400 font-medium mt-1 tracking-wider">{{ auth()->user()->email }}</p>
@@ -66,8 +66,8 @@
                     <div class="px-4 py-3 border-b border-slate-50 mb-2">
                         <p class="text-[11px] text-slate-400 font-bold uppercase tracking-widest mb-1">Account Role</p>
                         <div class="flex items-center gap-2">
-                            <div class="h-2 w-2 rounded-full {{ strtolower($roleName) == 'admin' ? 'bg-rose-500' : 'bg-blue-500' }}"></div>
-                            <p class="text-sm font-bold text-slate-700 capitalize">{{ $roleName }}</p>
+                            <div class="h-2 w-2 rounded-full {{ strtolower(auth()->user()->roles->first()->name) == 'admin' ? 'bg-rose-500' : 'bg-amber-500' }}"></div>
+                            <p class="text-sm font-bold text-slate-700 capitalize">{{ auth()->user()->roles->first()->name }}</p>
                         </div>
                     </div>
 
@@ -77,7 +77,7 @@
                             Mon Profil
                         </a>
 
-                        @if(strtolower($roleName) == 'admin')
+                        @if(strtolower(auth()->user()->roles->first()->name) == 'admin')
                             <a href="/admin/dashboard" class="flex items-center gap-3 px-4 py-2.5 text-sm font-semibold text-rose-600 hover:bg-rose-50 rounded-xl transition-all">
                                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
                                 Administration

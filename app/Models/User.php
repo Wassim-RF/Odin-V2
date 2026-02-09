@@ -50,8 +50,8 @@ class User extends Authenticatable
         return $this->hasMany(Categories::class);
     }
 
-    public function role() {
-        return $this->belongsToMany(Roles::class);
+    public function roles() {
+        return $this->belongsToMany(Roles::class , 'role_user');
     }
 
     public function tags() {
