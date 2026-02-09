@@ -35,19 +35,19 @@ class LinkPolicy
     /**
      * Determine whether the user can update the model.
      */
-    public function update(User $user, Links $links): bool
+    public function update(User $user, Links $links)
     {
         $pivote = $links->sharedUsers()->where('user_id' , $user->id)->first();
-        return $pivote && $pivote->pivot->permission === 'editor';
+        return ($pivote && $pivote->pivot->permission === 'editor') ? Response::allow() : Response::deny(`Vous n'avez pas acces pour modifier ce lien`);
     }
 
     /**
      * Determine whether the user can delete the model.
      */
-    public function delete(User $user, Links $links): bool
+    public function delete(User $user, Links $links)
     {
         $pivote = $links->sharedUsers()->where('user_id' , $user->id)->first();
-        return $pivote && $pivote->pivot->permission === 'editor';
+        return ($pivote && $pivote->pivot->permission === 'editor') ? Response::allow() : Response::deny(`Vous n'avez pas acces pour supprimer ce lien`);
     }
 
     /**

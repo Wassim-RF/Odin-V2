@@ -41,7 +41,7 @@ class LinksController extends Controller
 
         $data = [
             'title' => $linkRequest->link_title,
-            'url' => $linkRequest->link_url,
+            'url' => $linkRequest->g,
             'categories_id' => $linkRequest->category_id
         ];
 
@@ -50,8 +50,9 @@ class LinksController extends Controller
         return redirect()->back();
     }
 
-    public function destroy(Request $request , LinksServices $linksServices) {
+    public function destroy(Request $request , LinksServices $linksServices , Links $links) {
         if($request->link_id) {
+            $this->authorize('delete' , $links);
             $linksServices->deleteLink($request->link_id);
             return redirect()->back();
         }
