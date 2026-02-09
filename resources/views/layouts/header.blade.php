@@ -12,22 +12,42 @@
             </div>
 
             <nav class="hidden md:flex items-center gap-1 p-1.5 bg-slate-100/50 rounded-2xl border border-slate-200/60">
-                @php
-                    // $roleName = auth()->user()->roles->first()?->name;
-                    $navs = [
-                        ['label' => 'Accueil', 'url' => '/home', 'active' => request()->is('home')],
-                        ['label' => 'Catégories', 'url' => '/categories', 'active' => request()->is('categories')],
-                        ['label' => 'Liens', 'url' => '/links', 'active' => request()->is('links')],
-                        ['label' => 'Tags', 'url' => '/tags', 'active' => request()->is('tags')]
-                    ];
-                @endphp
+            @php
+                $navs = [
+                    ['label' => 'Accueil', 'url' => '/home', 'active' => request()->is('home'), 'icon' => null],
+                    ['label' => 'Catégories', 'url' => '/categories', 'active' => request()->is('categories'), 'icon' => null],
+                    ['label' => 'Liens', 'url' => '/links', 'active' => request()->is('links'), 'icon' => null],
+                    ['label' => 'Tags', 'url' => '/tags', 'active' => request()->is('tags'), 'icon' => null],
+                    ['label' => 'Partagés', 'url' => '/shared', 'active' => request()->is('shared'), 'isShared' => true]
+                ];
+            @endphp
 
-                @foreach($navs as $nav)
-                    <a href="{{ $nav['url'] }}" class="px-5 py-2 text-sm font-bold rounded-xl transition-all duration-200 {{ $nav['active'] ? 'bg-white text-blue-600 shadow-sm ring-1 ring-slate-200' : 'text-slate-500 hover:text-slate-900 hover:bg-white/50' }}">
+            @foreach($navs as $nav)
+                <a href="{{ $nav['url'] }}" 
+                class="relative px-5 py-2 text-sm font-bold rounded-xl transition-all duration-200 
+                {{ $nav['active'] 
+                        ? (isset($nav['isShared']) ? 'bg-purple-600 text-white shadow-lg shadow-purple-200' : 'bg-white text-blue-600 shadow-sm ring-1 ring-slate-200') 
+                        : (isset($nav['isShared']) ? 'text-purple-600 hover:bg-purple-50' : 'text-slate-500 hover:text-slate-900 hover:bg-white/50') 
+                }}">
+                    
+                    <div class="flex items-center gap-2">
+                        @if(isset($nav['isShared']))
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" />
+                            </svg>
+                        @endif
                         {{ $nav['label'] }}
-                    </a>
-                @endforeach
-            </nav>
+                    </div>
+
+                    @if(isset($nav['isShared']) && !request()->is('shared'))
+                        <span class="absolute -top-1 -right-1 flex h-3 w-3">
+                            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-purple-400 opacity-75"></span>
+                            <span class="relative inline-flex rounded-full h-3 w-3 bg-purple-500"></span>
+                        </span>
+                    @endif
+                </a>
+            @endforeach
+        </nav>
 
             <div class="group relative py-2">
                 <button class="flex items-center gap-3 pl-2 pr-4 py-1.5 rounded-2xl bg-slate-50 border border-slate-200 group-hover:bg-white group-hover:border-blue-200 transition-all duration-300 shadow-sm">

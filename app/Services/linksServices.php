@@ -10,7 +10,16 @@
         }
 
         public function createLink(array $data) {
-            return Links::create($data);
+            $link = Links::create($data);
+
+            $linkUserData = [
+                'user_id' => auth()->user()->id,
+                'link_id' => $link->id,
+                'permission' => 'editor'
+            ];
+
+            \DB::table('link_users')->insert($linkUserData);
+            return $link;
         }
 
         public function linkInMounth() {

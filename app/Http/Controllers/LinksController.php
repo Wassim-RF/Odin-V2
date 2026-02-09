@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Links;
 use Illuminate\Http\Request;
 use App\Http\Requests\linkRequest;
 use App\Services\LinksServices;
@@ -35,7 +36,9 @@ class LinksController extends Controller
         return redirect()->back();
     }
 
-    public function update(linkRequest $linkRequest , LinksServices $linksServices) {
+    public function update(linkRequest $linkRequest , LinksServices $linksServices , Links $links) {
+        $this->authorize('update' , $links);
+
         $data = [
             'title' => $linkRequest->link_title,
             'url' => $linkRequest->link_url,
