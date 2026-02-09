@@ -50,11 +50,27 @@ class User extends Authenticatable
         return $this->hasMany(Categories::class);
     }
 
+    public function role() {
+        return $this->belongsToMany(Roles::class);
+    }
+
     public function tags() {
         return $this->hasMany(Tags::class);
     }
 
     public function links() {
         return $this->hasMany(Links::class);
+    }
+
+    public function favoriteLinks() {
+        return $this->belongsToMany(Links::class, 'favorites');
+    }
+
+    public function sharedLinks() {
+        return $this->belongsToMany(Links::class , 'link_users')->withPivot('permission')->withTimestamps();
+    }
+
+    public function activities() {
+        return $this->hasMany(ActivityLog::class);
     }
 }

@@ -11,9 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('roles', function (Blueprint $table) {
+        Schema::create('activity_logs', function (Blueprint $table) {
             $table->id();
-            $table->enum('name' , ['user' , 'admin']);
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
+            $table->string('action');
+            $table->string('description');
             $table->timestamps();
         });
     }
@@ -23,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('roles');
+        Schema::dropIfExists('activity_logs');
     }
 };

@@ -4,13 +4,15 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Roles extends Model
+class ActivityLog extends Model
 {
     protected $fillable = [
-        'name'
+        'user_id',
+        'action',
+        'description'
     ];
-    
+
     public function user() {
-        return $this->belongsToMany(User::class);
+        return $this->belongsTo(User::class);
     }
 }

@@ -24,4 +24,12 @@ class Links extends Model
     public function tags() {
         return $this->belongsToMany(Tags::class);
     }
+
+    public function favoredByUsers() {
+        return $this->belongsToMany(User::class, 'favorites');
+    }
+
+    public function sharedUsers() {
+        return $this->belongsToMany(User::class , 'link_users')->withPivot('permission')->withTimestamps();
+    }
 }
