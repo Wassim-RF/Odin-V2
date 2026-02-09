@@ -1,45 +1,100 @@
-<header class="bg-white shadow-sm w-full px-5 border-b border-gray-100">
-    <div class="flex h-16 justify-between items-center">
-        <div class="flex items-center">
-            <a href="/home" class="shrink-0 flex items-center gap-2">
-                <img src="{{ asset('assets/picture/odin2.png') }}" alt="Logo" class="h-10 w-auto rounded-lg">
-                <span class="font-bold text-xl tracking-tight text-gray-900">BrandName</span>
-            </a>
-        </div>
+<header class="sticky top-0 z-40 w-full bg-white/70 backdrop-blur-xl border-b border-slate-100">
+    <div class="max-w-8xl mx-auto px-6">
+        <div class="flex h-20 justify-between items-center">
+            <div class="flex items-center">
+                <a href="/home" class="group flex items-center gap-3 transition-transform active:scale-95">
+                    <div class="relative">
+                        <img src="{{ asset('assets/picture/odin2.png') }}" alt="Logo" class="h-11 w-auto rounded-xl shadow-lg shadow-blue-100 group-hover:rotate-3 transition-all duration-300">
+                        <div class="absolute inset-0 rounded-xl ring-1 ring-inset ring-black/5"></div>
+                    </div>
+                    <span class="font-black text-2xl tracking-tighter text-slate-900 group-hover:text-blue-600 transition-colors">Odin</span>
+                </a>
+            </div>
 
-        <nav class="hidden md:flex space-x-8">
-            <a href="/home" class="px-3 py-2 text-sm font-medium {{ request()->is('home') ? 'text-gray-900 border-b-2 border-[#F59F0A]' : 'text-gray-500 hover:text-[#F59F0A] transition-colors' }}">Accueil</a>
-            <a href="/categories" class="px-3 py-2 text-sm font-medium {{ request()->is('categories') ? 'text-gray-900 border-b-2 border-[#F59F0A]' : 'text-gray-500 hover:text-[#F59F0A] transition-colors' }}">Catégories</a>
-            <a href="/links" class="px-3 py-2 text-sm font-medium {{ request()->is('links') ? 'text-gray-900 border-b-2 border-[#F59F0A]' : 'text-gray-500 hover:text-[#F59F0A] transition-colors' }}">Liens</a>
-            <a href="/tags" class="px-3 py-2 text-sm font-medium {{ request()->is('tags') ? 'text-gray-900 border-b-2 border-[#F59F0A]' : 'text-gray-500 hover:text-[#F59F0A] transition-colors' }}">Tags</a>
-        </nav>
+            <nav class="hidden md:flex items-center gap-1 p-1.5 bg-slate-100/50 rounded-2xl border border-slate-200/60">
+                @php
+                    $navs = [
+                        ['label' => 'Accueil', 'url' => '/home', 'active' => request()->is('home')],
+                        ['label' => 'Catégories', 'url' => '/categories', 'active' => request()->is('categories')],
+                        ['label' => 'Liens', 'url' => '/links', 'active' => request()->is('links')],
+                        ['label' => 'Tags', 'url' => '/tags', 'active' => request()->is('tags')]
+                    ];
+                @endphp
 
-        <div class="group relative py-4">
-            <button class="flex items-center gap-3 focus:outline-none">
-                <div class="text-right hidden sm:block">
-                    <p class="text-sm font-bold text-gray-900 leading-none">{{ auth()->user()->name }}</p>
-                    <p class="text-xs text-gray-500 mt-1">{{ auth()->user()->email }}</p>
+                @foreach($navs as $nav)
+                    <a href="{{ $nav['url'] }}" class="px-5 py-2 text-sm font-bold rounded-xl transition-all duration-200 {{ $nav['active'] ? 'bg-white text-blue-600 shadow-sm ring-1 ring-slate-200' : 'text-slate-500 hover:text-slate-900 hover:bg-white/50' }}">
+                        {{ $nav['label'] }}
+                    </a>
+                @endforeach
+            </nav>
+
+            <div class="group relative py-2">
+                <button class="flex items-center gap-3 pl-2 pr-4 py-1.5 rounded-2xl bg-slate-50 border border-slate-200 group-hover:bg-white group-hover:border-blue-200 transition-all duration-300 shadow-sm">
+                    <div class="relative">
+                        <img class="h-9 w-9 rounded-full object-cover border-2 border-white shadow-sm" 
+                            src="https://ui-avatars.com/api/?name={{ urlencode(auth()->user()->name) }}&background=0ea5e9&color=fff&bold=true" 
+                            alt="Profile">
+                        <span class="absolute bottom-0 right-0 h-3 w-3 rounded-full bg-green-500 border-2 border-white"></span>
+                    </div>
+                    
+                    <div class="text-left hidden sm:block">
+                        <div class="flex items-center gap-2">
+                            <p class="text-[13px] font-bold text-slate-900 leading-none">{{ auth()->user()->name }}</p>
+
+                            @php
+                                $roleName = auth()->user()->role->name ?? 'Viewer'; 
+                                $roleColor = match(strtolower($roleName)) {
+                                    'admin' => 'bg-rose-100 text-rose-600 border-rose-200',
+                                    'editor' => 'bg-amber-100 text-amber-600 border-amber-200',
+                                    default => 'bg-blue-100 text-blue-600 border-blue-200',
+                                };
+                            @endphp
+                            <span class="px-2 py-0.5 text-[10px] font-black uppercase tracking-tighter rounded-md border {{ $roleColor }}">
+                                {{ $roleName }}
+                            </span>
+                        </div>
+                        <p class="text-[10px] text-slate-400 font-medium mt-1 tracking-wider">{{ auth()->user()->email }}</p>
+                    </div>
+
+                    <svg class="w-4 h-4 text-slate-400 group-hover:translate-y-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                    </svg>
+                </button>
+
+                <div class="absolute right-0 mt-4 w-60 origin-top-right bg-white rounded-3xl shadow-[0_20px_50px_rgba(0,0,0,0.1)] border border-slate-100 p-2 opacity-0 translate-y-4 invisible group-hover:opacity-100 group-hover:translate-y-0 group-hover:visible transition-all duration-300 z-50">
+
+                    <div class="px-4 py-3 border-b border-slate-50 mb-2">
+                        <p class="text-[11px] text-slate-400 font-bold uppercase tracking-widest mb-1">Account Role</p>
+                        <div class="flex items-center gap-2">
+                            <div class="h-2 w-2 rounded-full {{ strtolower($roleName) == 'admin' ? 'bg-rose-500' : 'bg-blue-500' }}"></div>
+                            <p class="text-sm font-bold text-slate-700 capitalize">{{ $roleName }}</p>
+                        </div>
+                    </div>
+
+                    <div class="space-y-1">
+                        <a href="/profile" class="flex items-center gap-3 px-4 py-2.5 text-sm font-semibold text-slate-600 hover:bg-blue-50 hover:text-blue-600 rounded-xl transition-all">
+                            <svg class="w-4 h-4 opacity-70" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
+                            Mon Profil
+                        </a>
+
+                        @if(strtolower($roleName) == 'admin')
+                            <a href="/admin/dashboard" class="flex items-center gap-3 px-4 py-2.5 text-sm font-semibold text-rose-600 hover:bg-rose-50 rounded-xl transition-all">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+                                Administration
+                            </a>
+                        @endif
+                    </div>
+
+                    <div class="my-2 border-t border-slate-50"></div>
+
+                    <form action="{{ route('auth.logout') }}" method="POST">
+                        @csrf
+                        <button type="submit" class="flex w-full items-center gap-3 px-4 py-3 text-sm font-bold text-rose-500 hover:bg-rose-50 rounded-xl transition-all">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/></svg>
+                            Se déconnecter
+                        </button>
+                    </form>
                 </div>
-                <img class="h-9 w-9 rounded-full border border-gray-200" src="https://ui-avatars.com/api/?name=Anas+Errami&background=6366f1&color=fff" alt="User profile">
-            </button>
-
-            <div class="absolute right-0 top-full w-48 bg-white rounded-md shadow-xl border border-gray-100 py-1 
-                        opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
-                
-                <a href="/profile" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50">Mon Profil</a>
-                <a href="/settings" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50">Paramètres</a>
-                
-                <hr class="my-1 border-gray-100">
-
-                <form action="{{ route('auth.logout') }}" method="POST">
-                    @csrf
-                    <button type="submit" class="flex w-full items-center gap-2 px-4 py-2 text-sm text-red-600 hover:bg-red-50 font-medium">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="size-4">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15m3 0l3-3m0 0l-3-3m3 3H9" />
-                        </svg>
-                        Se déconnecter
-                    </button>
-                </form>
             </div>
         </div>
     </div>

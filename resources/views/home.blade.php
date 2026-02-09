@@ -33,7 +33,7 @@
                 </div>
                 
             </div>
-            <div class="w-full bg-white border border-gray-200 shadow-sm rounded-2xl p-5 hover:shadow-md transition-shadow">
+            <div class="w-full bg-[#1B294B] text-white border border-gray-200 shadow-sm rounded-2xl p-5 hover:shadow-md transition-shadow">
                 <div class="w-10 h-10 bg-[#E6F5FC] rounded-xl flex items-center justify-center mb-4">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 256 256"><path fill="#0DA2E7" d="M200 64v104a8 8 0 0 1-16 0V83.31L69.66 197.66a8 8 0 0 1-11.32-11.32L172.69 72H88a8 8 0 0 1 0-16h104a8 8 0 0 1 8 8Z"/></svg>
                 </div>
