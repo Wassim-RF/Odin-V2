@@ -29,13 +29,9 @@
         </div>
 
         <div class="relative">
-            
-            {{-- Section 1: REÇUS --}}
             <div id="section-recus" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-7 transition-all duration-300">
                 
                 <div class="group relative bg-white border border-slate-100 shadow-[0_8px_30px_rgb(0,0,0,0.02)] rounded-4xl p-6 hover:shadow-[0_20px_40px_rgba(0,0,0,0.08)] hover:-translate-y-1 transition-all duration-300">
-                    
-                    {{-- Badge "De:" --}}
                     <div class="absolute -top-3 left-6 z-30">
                         <span class="bg-indigo-600 text-white text-[10px] font-black px-4 py-1.5 rounded-full shadow-lg shadow-indigo-200 uppercase tracking-widest">
                             De: Amine Dev
@@ -79,12 +75,10 @@
                 </div>
             </div>
 
-            {{-- Section 2: ENVOYÉS --}}
-            <div id="section-envoyes" class="hidden grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-7 transition-all duration-300">
+            <div id="section-envoyes" class="hidden grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-7 transition-all duration-300">
                 
                 <div class="group relative bg-white border border-slate-100 shadow-[0_8px_30px_rgb(0,0,0,0.02)] rounded-4xl p-6 hover:shadow-[0_20px_40px_rgba(0,0,0,0.08)] hover:-translate-y-1 transition-all duration-300">
-                    
-                    {{-- Badge "À:" --}}
+
                     <div class="absolute -top-3 left-6 z-30">
                         <span class="bg-emerald-500 text-white text-[10px] font-black px-4 py-1.5 rounded-full shadow-lg shadow-emerald-100 uppercase tracking-widest">
                             À: Omar Dev
@@ -132,13 +126,13 @@
             const btnEnvoyes = document.getElementById('tab-envoyes');
 
             if (tabName === 'recus') {
-                sectionRecus.classList.remove('hidden');
-                sectionEnvoyes.classList.add('hidden');
+                sectionRecus.classList.replace('hidden' , 'grid');
+                sectionEnvoyes.classList.replace('grid' , 'hidden');
                 btnRecus.className = "px-8 py-2.5 rounded-xl text-xs font-black uppercase tracking-widest transition-all bg-[#1B294B] text-white shadow-lg";
                 btnEnvoyes.className = "px-8 py-2.5 rounded-xl text-xs font-black uppercase tracking-widest transition-all text-slate-500 hover:text-slate-800";
             } else {
-                sectionEnvoyes.classList.remove('hidden');
-                sectionRecus.classList.add('hidden');
+                sectionEnvoyes.classList.replace('hidden' , 'grid');
+                sectionRecus.classList.replace('grid' , 'hidden');
                 btnEnvoyes.className = "px-8 py-2.5 rounded-xl text-xs font-black uppercase tracking-widest transition-all bg-[#1B294B] text-white shadow-lg";
                 btnRecus.className = "px-8 py-2.5 rounded-xl text-xs font-black uppercase tracking-widest transition-all text-slate-500 hover:text-slate-800";
             }

@@ -97,3 +97,15 @@ export function annulerAddTagModal() {
 
     modale_addTag_pop.classList.replace("flex" , "hidden");
 }
+
+export function shareLinkModals() {
+    const modale_shareLink_pop = document.getElementById("modale_shareLink_pop");
+
+    modale_shareLink_pop.classList.replace("hidden" , "flex");
+}
+
+export function annulerShareLinkModal() {
+    const modale_shareLink_pop = document.getElementById("modale_shareLink_pop");
+
+    modale_shareLink_pop.classList.replace("flex" , "hidden");
+}
