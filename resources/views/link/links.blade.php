@@ -133,11 +133,6 @@
                             </svg>
                             <p class="text-[13px] font-bold truncate tracking-tight">{{ preg_replace('(^https?://)', '', $link->url) }}</p>
                         </div>
-                        <div class="pt-3">
-                            <span class="inline-flex items-center px-3 py-1 text-[10px] font-black uppercase tracking-widest text-[#1B294B] bg-blue-50 rounded-lg group-hover:bg-[#1B294B] group-hover:text-white transition-all duration-300">
-                                {{ $link->categorie->title ?? "Sans Catégorie" }}
-                            </span>
-                        </div>
                     </div>
                     <a href="{{ $link->url }}" target="_blank" class="mt-6 flex items-center justify-between py-3 border-t border-slate-50 group-hover:border-blue-50 text-[#1B294B] font-black text-xs uppercase tracking-widest hover:text-blue-600 transition-all">
                         <span>Visiter le lien</span>

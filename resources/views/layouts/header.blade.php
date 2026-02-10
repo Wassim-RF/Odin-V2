@@ -18,7 +18,7 @@
                     ['label' => 'Catégories', 'url' => '/categories', 'active' => request()->is('categories'), 'icon' => null],
                     ['label' => 'Liens', 'url' => '/links', 'active' => request()->is('links'), 'icon' => null],
                     ['label' => 'Tags', 'url' => '/tags', 'active' => request()->is('tags'), 'icon' => null],
-                    ['label' => 'Partagés', 'url' => '/shared', 'active' => request()->is('shared'), 'isShared' => true]
+                    ['label' => 'Partagés', 'url' => '/sharedLinks', 'active' => request()->is('sharedLinks'), 'isShared' => true]
                 ];
             @endphp
 

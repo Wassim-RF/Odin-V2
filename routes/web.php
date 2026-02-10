@@ -30,6 +30,7 @@ Route::middleware(Authenticate::class)->group(function () {
     Route::get('/categorie/{id}' , [CategoriesController::class , 'showCategorie'])->middleware(CheckAccountStatus::class);
     Route::get('/links' , [LinksController::class , 'index'])->middleware(CheckAccountStatus::class)->name('links.index');
     Route::get('/tags' , [TagsController::class , 'index'])->middleware(CheckAccountStatus::class);
+    Route::get('/sharedLinks' , [LinksController::class , 'showSharedLinks'])->middleware(CheckAccountStatus::class);
 
     //post
     Route::post('/logout' , [authController::class , "logout"])->name('auth.logout');

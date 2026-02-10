@@ -59,4 +59,8 @@ class LinksController extends Controller
 
         return redirect()->back();
     }
+
+    public function showSharedLinks() {
+        return view('link.sharedLink');
+    }
 }
