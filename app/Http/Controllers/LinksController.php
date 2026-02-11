@@ -68,6 +68,7 @@ class LinksController extends Controller
     public function shareLinkInApp(LinksServices $linksServices , shareLinkRequest $shareLinkRequest) {
         $linksServices->shareLinkInApp(
             $shareLinkRequest->shareLink_user_id,
+            auth()->user()->id,
             $shareLinkRequest->shareLink_link_id,
             $shareLinkRequest->shareLink_permission
         );

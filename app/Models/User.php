@@ -67,7 +67,7 @@ class User extends Authenticatable
     }
 
     public function sharedLinks() {
-        return $this->belongsToMany(Links::class , 'link_users' , 'user_id' , 'link_id')->withPivot('permission')->withTimestamps();
+        return $this->belongsToMany(Links::class , 'link_users' , 'user_id' , 'link_id')->withPivot('permission' , 'sender_id')->withTimestamps();
     }
 
     public function activities() {

@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('link_id')->constrained('links')->onDelete('cascade');
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
+            $table->foreignId('sender_id')->constrained('users')->onDelete('cascade');
             $table->enum('permission' ,['editor' , 'viewer'])->default('viewer');
             $table->timestamps();
         });

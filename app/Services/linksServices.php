@@ -14,6 +14,7 @@
 
             $linkUserData = [
                 'user_id' => auth()->user()->id,
+                'sender_id' => auth()->user()->id,
                 'link_id' => $link->id,
                 'permission' => 'editor'
             ];
@@ -59,14 +60,16 @@
                 ->get();
         }
 
-        public function shareLinkInApp(string $userInput , int $linkId , string $permission) {
-
+        public function shareLinkInApp(string $userInput, int $senderId , int $linkId , string $permission) {
             $targetedUser = User::where('id', $userInput)
                 ->orWhere('name', $userInput)
                 ->firstOrFail();
 
             $targetedUser->sharedLinks()->syncWithoutDetaching([
-                $linkId => ['permission' => $permission]
+                $linkId => [
+                    'permission' => $permission,
+                    'sender_id' => $senderId
+                ]
             ]);
         }
 
