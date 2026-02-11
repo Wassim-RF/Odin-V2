@@ -97,12 +97,15 @@ export function shareLinkModals(button) {
     const modale_shareLink_pop = document.getElementById("modale_shareLink_pop");
     const share_preview_title = document.getElementById("share_preview_title");
     const share_preview_url = document.getElementById("share_preview_url");
+    const shareLink_link_id = document.getElementById("shareLink_link_id");
 
     const title = button.dataset.title;
     const url = button.dataset.url;
+    const id = button.dataset.id;
 
     share_preview_title.innerText = title;
     share_preview_url.innerText = url;
+    shareLink_link_id.value = id;
     modale_shareLink_pop.classList.replace("hidden" , "flex");
 }
 

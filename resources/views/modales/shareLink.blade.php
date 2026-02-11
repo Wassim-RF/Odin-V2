@@ -81,15 +81,25 @@
                     <h3 class="text-lg font-black text-slate-800">Oups !</h3>
                     <p class="text-sm font-medium text-slate-500">Cette fonctionnalité sera ajoutée prochainement.</p>
                 </div>
+                <div class="flex items-center gap-3 pt-6 mt-2">
+                <button type="button"
+                    id="annuler_ShareLien_Modal_button"
+                    class="w-full flex-1 px-6 py-3.5 text-sm font-bold text-slate-500 bg-slate-100 rounded-2xl hover:bg-slate-200 hover:text-slate-700 transition-all active:scale-95">
+                    Annuler
+                </button>
+            </div>
             </div>
 
-            <form action="#" method="POST" id="content_app" class="space-y-5 hidden">
+            <form action="{{ route('shareLink.App') }}" method="POST" id="content_app" class="space-y-5 hidden">
+                @csrf
+
+                <input type="hidden" name="shareLink_link_id" id="shareLink_link_id">
                 <div class="space-y-2">
                     <label class="flex items-center gap-2 text-sm font-black text-slate-700">
                         <span>ID Utilisateur / Pseudo</span>
                     </label>
                     <div class="relative">
-                        <input type="text" name="user_id" 
+                        <input type="text" name="shareLink_user_id" 
                             class="block w-full rounded-2xl border-slate-200 border bg-slate-50/50 px-4 py-3 pl-11 text-slate-900 focus:bg-white focus:border-indigo-400 focus:ring-4 focus:ring-indigo-400/10 transition-all outline-none text-sm font-medium" 
                             placeholder="#12345 ou username">
                         <span class="absolute left-4 top-3.5 text-slate-400">
@@ -113,7 +123,7 @@
 
                     <div class="grid grid-cols-2 gap-2 p-1 bg-slate-100/50 rounded-2xl">
                         <label class="cursor-pointer">
-                            <input type="radio" name="role" value="viewer" class="peer hidden" checked>
+                            <input type="radio" name="shareLink_permission" value="viewer" class="peer hidden" checked>
                             <div class="flex items-center justify-center gap-2 py-2 px-3 rounded-xl text-[11px] font-bold uppercase tracking-tight transition-all peer-checked:bg-white peer-checked:text-indigo-600 peer-checked:shadow-sm text-slate-500">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
@@ -123,7 +133,7 @@
                             </div>
                         </label>
                         <label class="cursor-pointer">
-                            <input type="radio" name="role" value="editor" class="peer hidden">
+                            <input type="radio" name="shareLink_permission" value="editor" class="peer hidden">
                             <div class="flex items-center justify-center gap-2 py-2 px-3 rounded-xl text-[11px] font-bold uppercase tracking-tight transition-all peer-checked:bg-[#1B294B] peer-checked:text-white peer-checked:shadow-md text-slate-500">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
@@ -133,9 +143,7 @@
                         </label>
                     </div>
                 </div>
-            </form>
-
-            <div class="flex items-center gap-3 pt-6 mt-2">
+                <div class="flex items-center gap-3 pt-6 mt-2">
                 <button type="button"
                     id="annuler_ShareLien_Modal_button"
                     class="flex-1 px-6 py-3.5 text-sm font-bold text-slate-500 bg-slate-100 rounded-2xl hover:bg-slate-200 hover:text-slate-700 transition-all active:scale-95">
@@ -149,6 +157,7 @@
                     </svg>
                 </button>
             </div>
+            </form>
         </div>
     </div>
 </div>

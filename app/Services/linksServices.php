@@ -59,8 +59,20 @@
                 ->get();
         }
 
-        public function shareLinkInApp(int $id) {
-            
+        public function shareLinkInApp(string $userInput , int $linkId , string $permission) {
+
+            $targetedUser = User::where('id', $userInput)
+                ->orWhere('name', $userInput)
+                ->firstOrFail();
+
+            $targetedUser->sharedLinks()->syncWithoutDetaching([
+                $linkId => ['permission' => $permission]
+            ]);
         }
+
+        // public function shareLinkInApp(int $targetedUserId , int $targetedLinkId , string $permission)  {
+        //     dd($targetedUserId, $targetedLinkId, $permission);
+        // }
+
 
     }

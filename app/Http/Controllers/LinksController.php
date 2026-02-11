@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\shareLinkRequest;
 use App\Models\Links;
 use Illuminate\Http\Request;
 use App\Http\Requests\linkRequest;
@@ -64,5 +65,13 @@ class LinksController extends Controller
         return view('link.sharedLink');
     }
 
-    public function shareLinkInApp(LinksServices $linksServices) {}
+    public function shareLinkInApp(LinksServices $linksServices , shareLinkRequest $shareLinkRequest) {
+        $linksServices->shareLinkInApp(
+            $shareLinkRequest->shareLink_user_id,
+            $shareLinkRequest->shareLink_link_id,
+            $shareLinkRequest->shareLink_permission
+        );
+
+        return redirect()->back();
+    }
 }

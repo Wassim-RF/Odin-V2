@@ -37,6 +37,7 @@ Route::middleware(Authenticate::class)->group(function () {
     Route::post('/addCategorie' , [CategoriesController::class , 'store'])->name('create.categorie');
     Route::post('/addLink' , [LinksController::class , 'store'])->name('create.link');
     Route::post('/addTag' , [TagsController::class , 'store'])->name('create.tag');
+    Route::post('/shareLink' , [LinksController::class , 'shareLinkInApp'])->name('shareLink.App');
 
     //put
     Route::put('/editCategorie' , [CategoriesController::class , 'update'])->name('edit.categorie');
