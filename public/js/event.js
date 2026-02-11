@@ -11,6 +11,10 @@ import {annulerAddTagModal} from './mod/showModales.js';
 import {shareLinkModals} from './mod/showModales.js';
 import {annulerShareLinkModal} from './mod/showModales.js';
 
+// Share link 
+import {toEmailParte} from './mod/changePageInShareLink.js';
+import {toAppPart} from './mod/changePageInShareLink.js';
+
 export function setupEvents() {
     const addCategorie_Modal_button = document.getElementById("addCategorie_Modal_button");
     const editCategorie_Modal_button = document.querySelectorAll(".editCategorie_Modal_button");
@@ -23,6 +27,11 @@ export function setupEvents() {
     const addTag_Modal_button = document.getElementById("addTag_Modal_button");
     const annuler_addTag_Button = document.getElementById("annuler_addTag_Button");
     const shareLink_Modal_button = document.querySelectorAll(".shareLink_Modal_button");
+    const annuler_ShareLien_Modal_button = document.getElementById("annuler_ShareLien_Modal_button");
+
+    // Share link
+    const btnEmail = document.getElementById('tab_email');
+    const btnApp = document.getElementById('tab_app');
     
     if (addCategorie_Modal_button) {
         addCategorie_Modal_button.addEventListener("click" , addCategorieModals);
@@ -74,7 +83,18 @@ export function setupEvents() {
 
     if (shareLink_Modal_button) {
         shareLink_Modal_button.forEach(btn => {
-            btn.addEventListener("click" , shareLinkModals)
+            btn.addEventListener("click" , (e) => {
+                shareLinkModals(e.currentTarget);
+            })
         })
+    }
+
+    if (annuler_ShareLien_Modal_button) {
+        annuler_ShareLien_Modal_button.addEventListener("click" , annulerShareLinkModal);
+    }
+
+    if (btnApp && btnEmail) {
+        btnApp.addEventListener("click" , toAppPart);
+        btnEmail.addEventListener("click" , toEmailParte);
     }
 }

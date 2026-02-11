@@ -1,10 +1,9 @@
-<div class="fixed inset-0 flex items-center justify-center bg-slate-900/60 backdrop-blur-md z-50 transition-all duration-300" id="modale_shareLink_pop">
-    <form action="#" method="POST" id="share_form" 
+<div class="fixed inset-0 hidden items-center justify-center bg-slate-900/60 backdrop-blur-md z-50 transition-all duration-300" id="modale_shareLink_pop">
+    <div id="share_form" 
         class="w-[450px] mx-auto bg-white rounded-4xl shadow-[0_20px_50px_rgba(0,0,0,0.2)] overflow-hidden border border-slate-100 transform transition-all duration-300">
-        @csrf
         
-        <input type="hidden" name="link_id" id="share_link_id">
-        <input type="hidden" name="share_method" id="share_method" value="email">
+        {{-- <input type="hidden" name="link_id" id="share_link_id">
+        <input type="hidden" name="share_method" id="share_method" value="email"> --}}
 
         <div class="px-8 py-6 border-b border-slate-50 bg-slate-50/30">
             <div class="flex items-center gap-3">
@@ -21,30 +20,35 @@
         </div>
 
         <div class="p-8">
-            
             <div class="bg-slate-50 border border-slate-100 rounded-xl p-3 mb-6 flex items-center gap-3">
-                <div class="h-8 w-8 bg-white rounded-lg border border-slate-100 flex items-center justify-center text-slate-400">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <div class="h-10 w-10 shrink-0 bg-white rounded-lg border border-slate-100 flex items-center justify-center text-slate-400">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101" />
                     </svg>
                 </div>
-                <div class="overflow-hidden">
-                    <p class="text-xs font-bold text-slate-700 truncate" id="share_preview_title">Titre du lien...</p>
+
+                <div class="overflow-hidden flex flex-col justify-center">
+                    <p class="text-[13px] font-black text-slate-800 truncate leading-tight mb-0.5" id="share_preview_title">
+                        
+                    </p>
+                    <p class="text-[10px] font-medium text-indigo-500/80 truncate lowercase tracking-tight" id="share_preview_url">
+                        
+                    </p>
                 </div>
             </div>
 
             <div class="flex p-1 mb-6 bg-slate-100 rounded-xl">
-                <button type="button" onclick="switchShareMode('email')" id="tab_email"
+                <button type="button" id="tab_email"
                     class="flex-1 py-2 text-sm font-bold rounded-lg shadow-sm transition-all bg-white text-slate-800">
                     Via Email
                 </button>
-                <button type="button" onclick="switchShareMode('app')" id="tab_app"
+                <button type="button" id="tab_app"
                     class="flex-1 py-2 text-sm font-bold rounded-lg transition-all text-slate-500 hover:text-slate-700">
                     Via Application
                 </button>
             </div>
 
-            <div id="content_email" class="space-y-5 block">
+            {{-- <div id="content_email" class="space-y-5 block">
                 <div class="space-y-2">
                     <label class="flex items-center gap-2 text-sm font-black text-slate-700">
                         <span>Email du destinataire</span>
@@ -62,9 +66,24 @@
                         class="block w-full rounded-2xl border-slate-200 border bg-slate-50/50 px-4 py-3 text-slate-900 focus:bg-white focus:border-indigo-400 focus:ring-4 focus:ring-indigo-400/10 transition-all outline-none text-sm font-medium resize-none" 
                         placeholder="Petit message..."></textarea>
                 </div>
+            </div> --}}
+
+            <div id="content_email" class="flex flex-col items-center justify-center w-full py-10 px-6 rounded-2xl border-2 border-dashed border-slate-200 bg-slate-50/50 text-center space-y-4">
+                <div class="relative">
+                    <div class="rounded-full bg-indigo-100 p-4 ring-8 ring-indigo-50">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                    </div>
+                    <span class="absolute -top-1 -right-2 bg-slate-800 text-white text-[10px] font-bold px-2 py-0.5 rounded-full shadow-sm">404</span>
+                </div>
+                <div class="max-w-xs mx-auto space-y-1">
+                    <h3 class="text-lg font-black text-slate-800">Oups !</h3>
+                    <p class="text-sm font-medium text-slate-500">Cette fonctionnalité sera ajoutée prochainement.</p>
+                </div>
             </div>
 
-            <div id="content_app" class="space-y-5 hidden">
+            <form action="#" method="POST" id="content_app" class="space-y-5 hidden">
                 <div class="space-y-2">
                     <label class="flex items-center gap-2 text-sm font-black text-slate-700">
                         <span>ID Utilisateur / Pseudo</span>
@@ -114,11 +133,11 @@
                         </label>
                     </div>
                 </div>
-            </div>
+            </form>
 
             <div class="flex items-center gap-3 pt-6 mt-2">
-                <button type="button" 
-                    onclick="document.getElementById('modale_shareLink_pop').classList.add('hidden')"
+                <button type="button"
+                    id="annuler_ShareLien_Modal_button"
                     class="flex-1 px-6 py-3.5 text-sm font-bold text-slate-500 bg-slate-100 rounded-2xl hover:bg-slate-200 hover:text-slate-700 transition-all active:scale-95">
                     Annuler
                 </button>
@@ -131,36 +150,5 @@
                 </button>
             </div>
         </div>
-    </form>
+    </div>
 </div>
-
-<script>
-    function switchShareMode(mode) {
-        const btnEmail = document.getElementById('tab_email');
-        const btnApp = document.getElementById('tab_app');
-        const contentEmail = document.getElementById('content_email');
-        const contentApp = document.getElementById('content_app');
-        const inputMethod = document.getElementById('share_method');
-
-        const activeClass = "bg-white text-slate-800 shadow-sm";
-        const inactiveClass = "text-slate-500 hover:text-slate-700 bg-transparent shadow-none";
-
-        if (mode === 'email') {
-            contentEmail.classList.remove('hidden');
-            contentEmail.classList.add('block');
-            contentApp.classList.add('hidden');
-            contentApp.classList.remove('block');
-            btnEmail.className = "flex-1 py-2 text-sm font-bold rounded-lg transition-all " + activeClass;
-            btnApp.className = "flex-1 py-2 text-sm font-bold rounded-lg transition-all " + inactiveClass;
-            inputMethod.value = "email";
-        } else {
-            contentApp.classList.remove('hidden');
-            contentApp.classList.add('block');
-            contentEmail.classList.add('hidden');
-            contentEmail.classList.remove('block');
-            btnApp.className = "flex-1 py-2 text-sm font-bold rounded-lg transition-all " + activeClass;
-            btnEmail.className = "flex-1 py-2 text-sm font-bold rounded-lg transition-all " + inactiveClass;
-            inputMethod.value = "app";
-        }
-    }
-</script>

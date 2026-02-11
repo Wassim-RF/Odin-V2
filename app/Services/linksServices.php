@@ -59,4 +59,8 @@
                 ->get();
         }
 
+        public function shareLinkInApp(int $id) {
+            
+        }
+
     }

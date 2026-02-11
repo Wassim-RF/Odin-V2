@@ -63,4 +63,6 @@ class LinksController extends Controller
     public function showSharedLinks() {
         return view('link.sharedLink');
     }
+
+    public function shareLinkInApp(LinksServices $linksServices) {}
 }

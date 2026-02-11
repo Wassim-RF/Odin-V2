@@ -21,11 +21,6 @@ export function editCategorieModals(button) {
     const title = button.dataset.title;
     const description = button.dataset.description;
 
-    console.log(id);
-    console.log(title);
-    console.log(description);
-
-
     edit_categorie_id.value = id;
     edit_categorie_title.value = title;
     edit_categorie_description.value = description;
@@ -98,9 +93,16 @@ export function annulerAddTagModal() {
     modale_addTag_pop.classList.replace("flex" , "hidden");
 }
 
-export function shareLinkModals() {
+export function shareLinkModals(button) {
     const modale_shareLink_pop = document.getElementById("modale_shareLink_pop");
+    const share_preview_title = document.getElementById("share_preview_title");
+    const share_preview_url = document.getElementById("share_preview_url");
 
+    const title = button.dataset.title;
+    const url = button.dataset.url;
+
+    share_preview_title.innerText = title;
+    share_preview_url.innerText = url;
     modale_shareLink_pop.classList.replace("hidden" , "flex");
 }
 
