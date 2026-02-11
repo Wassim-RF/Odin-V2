@@ -37,8 +37,17 @@ class LinkPolicy
      */
     public function update(User $user, Links $links)
     {
-        $pivote = $links->sharedUsers()->where('user_id' , $user->id)->first();
-        return ($pivote && $pivote->pivot->permission === 'editor') ? Response::allow() : Response::deny(`Vous n'avez pas acces pour modifier ce lien`);
+        $pivote = $links->sharedUsers()->where('user_id', $user->id)->first();
+
+        dd([
+            'user_id' => $user->id,
+            'link_id' => $links->id,
+            'pivot' => $pivote ? $pivote->pivot : null
+        ]);
+
+        return ($pivote && $pivote->pivot->permission === 'editor')
+            ? Response::allow()
+            : Response::deny("Vous n'avez pas acces pour modifier ce lien");
     }
 
     /**

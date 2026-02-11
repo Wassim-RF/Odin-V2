@@ -38,11 +38,12 @@ class LinksController extends Controller
     }
 
     public function update(linkRequest $linkRequest , LinksServices $linksServices , Links $links) {
-        $this->authorize('update' , $links);
+        // $this->authorize('update' , $links);
+
 
         $data = [
             'title' => $linkRequest->link_title,
-            'url' => $linkRequest->g,
+            'url' => $linkRequest->link_url,
             'categories_id' => $linkRequest->category_id
         ];
 
