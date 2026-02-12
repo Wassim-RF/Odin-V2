@@ -26,7 +26,7 @@ class Links extends Model
     }
 
     public function favoredByUsers() {
-        return $this->belongsToMany(User::class, 'favorites')->withTimestamps();
+        return $this->belongsToMany(User::class, 'favorites' , 'link_id' , 'user_id')->withTimestamps();
     }
 
     public function sharedUsers() {

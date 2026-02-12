@@ -93,8 +93,8 @@
                             @csrf
                             <input type="hidden" name="link_id" value="{{ $link->id }}">
                             <button title="Favoris" type="submit" 
-                                class="p-2 rounded-xl border transition-all {{ $link->is_favorite ? 'bg-red-50 border-red-100 text-red-500 shadow-sm' : 'bg-slate-50 border-slate-100 text-slate-400 hover:text-red-500 hover:bg-white' }}">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="{{ $link->is_favorite ? 'currentColor' : 'none' }}" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                                class="p-2 rounded-xl border transition-all {{ $link->favoredByUsers->contains(auth()->user()->id) ? 'bg-red-50 border-red-100 text-red-500 shadow-sm' : 'bg-slate-50 border-slate-100 text-slate-400 hover:text-red-500 hover:bg-white' }}">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="{{ $link->favoredByUsers->contains(auth()->user()->id) ? 'currentColor' : 'none' }}" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z" />
                                 </svg>
                             </button>
