@@ -14,6 +14,8 @@ import {annulerShareLinkModal} from './mod/showModales.js';
 // Share link 
 import {toEmailParte} from './mod/changePageInShareLink.js';
 import {toAppPart} from './mod/changePageInShareLink.js';
+import {sharePageToRecuPage} from './mod/changePageInShareLink.js';
+import {sharePageToEnvoiPage} from './mod/changePageInShareLink.js';
 
 export function setupEvents() {
     const addCategorie_Modal_button = document.getElementById("addCategorie_Modal_button");
@@ -32,6 +34,8 @@ export function setupEvents() {
     // Share link
     const btnEmail = document.getElementById('tab_email');
     const btnApp = document.getElementById('tab_app');
+    const btnRecus = document.getElementById('tab-recus');
+    const btnEnvoyes = document.getElementById('tab-envoyes');
     
     if (addCategorie_Modal_button) {
         addCategorie_Modal_button.addEventListener("click" , addCategorieModals);
@@ -96,5 +100,9 @@ export function setupEvents() {
     if (btnApp && btnEmail) {
         btnApp.addEventListener("click" , toAppPart);
         btnEmail.addEventListener("click" , toEmailParte);
+    }
+    if (btnRecus && btnEnvoyes) {
+        btnRecus.addEventListener("click" , sharePageToRecuPage);
+        btnEnvoyes.addEventListener("click" , sharePageToEnvoiPage);
     }
 }

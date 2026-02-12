@@ -62,8 +62,18 @@ class LinksController extends Controller
         return redirect()->back();
     }
 
-    public function showSharedLinks() {
-        return view('link.sharedLink');
+    public function showSharedLinks(LinksServices $linksServices) {
+        $user = auth()->user();
+
+        $receivedLinks = $user->sharedLinks()
+            ->wherePivot('sender_id', '!=', $user->id)
+            ->get();
+
+        $sentLinks = Links::whereHas('sharedUsers', function($q) use ($user) {
+            $q->where('link_users.sender_id', $user->id);
+        })->get();
+        
+        return view('link.sharedLink' , compact('receivedLinks' , 'sentLinks'));
     }
 
     public function shareLinkInApp(LinksServices $linksServices , shareLinkRequest $shareLinkRequest) {

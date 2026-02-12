@@ -30,6 +30,10 @@ class Links extends Model
     }
 
     public function sharedUsers() {
-        return $this->belongsToMany(User::class, 'link_users', 'link_id', 'user_id')->withPivot('permission', 'sender_id')->withTimestamps();
+
+        return $this->belongsToMany(User::class, 'link_users', 'link_id', 'user_id')
+            ->using(link_user::class)
+            ->withPivot('permission', 'sender_id')
+            ->withTimestamps();
     }
 }

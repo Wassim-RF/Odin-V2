@@ -77,5 +77,11 @@
         //     dd($targetedUserId, $targetedLinkId, $permission);
         // }
 
+        public function  sendLinkInfo(int $id) {
+            return Links::with(['sharedUsers' => function ($query) use ($id) {
+                $query->where('link_users.sender_id', $id);
+            }])->get();
+        }
+
 
     }

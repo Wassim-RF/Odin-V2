@@ -39,11 +39,11 @@ class LinkPolicy
     {
         $pivote = $links->sharedUsers()->where('user_id', $user->id)->first();
 
-        dd([
-            'user_id' => $user->id,
-            'link_id' => $links->id,
-            'pivot' => $pivote ? $pivote->pivot : null
-        ]);
+        // dd([
+        //     'user_id' => $user->id,
+        //     'link_id' => $links->id,
+        //     'pivot' => $pivote ? $pivote->pivot : null
+        // ]);
 
         return ($pivote && $pivote->pivot->permission === 'editor')
             ? Response::allow()
