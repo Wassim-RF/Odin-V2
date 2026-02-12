@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('activity_logs', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
-            $table->string('action');
-            $table->string('description');
+            $table->enum('action' , ['add' , 'delete' , 'update' , 'register' , 'share' , 'restore']);
+            $table->enum('subject_type' , ['link' , 'categorie' , 'account' , 'tag']);
             $table->timestamps();
         });
     }
