@@ -38,6 +38,7 @@ Route::middleware(Authenticate::class)->group(function () {
     Route::post('/addLink' , [LinksController::class , 'store'])->name('create.link');
     Route::post('/addTag' , [TagsController::class , 'store'])->name('create.tag');
     Route::post('/shareLink' , [LinksController::class , 'shareLinkInApp'])->name('shareLink.App');
+    Route::post('/favoriteLink' , [LinksController::class , 'favorite'])->name('links.favorite');
 
     //put
     Route::put('/editCategorie' , [CategoriesController::class , 'update'])->name('edit.categorie');

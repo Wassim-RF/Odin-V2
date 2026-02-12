@@ -86,4 +86,10 @@ class LinksController extends Controller
 
         return redirect()->back();
     }
+
+    public function favorite(LinksServices $linksServices , Request $request) {
+        $linksServices->favorite($request->link_id);
+
+        return redirect()->back();
+    }
 }

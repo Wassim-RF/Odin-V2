@@ -83,5 +83,9 @@
             }])->get();
         }
 
+        public function favorite(int $id) {
+            $user = auth()->user();
 
+            $user->favoriteLinks()->syncWithoutDetaching($id);
+        }
     }

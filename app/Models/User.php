@@ -63,7 +63,7 @@ class User extends Authenticatable
     }
 
     public function favoriteLinks() {
-        return $this->belongsToMany(Links::class, 'favorites');
+        return $this->belongsToMany(Links::class, 'favorites' , 'user_id' , 'link_id')->withTimestamps();
     }
 
     public function sharedLinks() {

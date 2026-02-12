@@ -89,7 +89,7 @@
             @foreach ($links as $link)
                 <div class="group relative bg-white border border-slate-100 shadow-[0_8px_30px_rgb(0,0,0,0.02)] rounded-4xl p-6 hover:shadow-[0_20px_40px_rgba(0,0,0,0.08)] hover:-translate-y-1 transition-all duration-300">
                     <div class="absolute top-5 right-5 z-20 flex flex-col gap-2">
-                        <form action="#" method="POST">
+                        <form action="{{ route('links.favorite') }}" method="POST">
                             @csrf
                             <input type="hidden" name="link_id" value="{{ $link->id }}">
                             <button title="Favoris" type="submit" 
