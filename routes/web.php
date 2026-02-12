@@ -1,7 +1,8 @@
 <?php
 
+use App\Http\Controllers\AdminController;
+use App\Http\Middleware\CheckAccountRole;
 use Illuminate\Support\Facades\Route;
-use App\Http\Requests\LoginRequest;
 use App\Http\Middleware\CheckAccountStatus;
 use App\Http\Middleware\Authenticate;
 use App\Http\Controllers\userController;
@@ -31,6 +32,7 @@ Route::middleware(Authenticate::class)->group(function () {
     Route::get('/links' , [LinksController::class , 'index'])->middleware(CheckAccountStatus::class)->name('links.index');
     Route::get('/tags' , [TagsController::class , 'index'])->middleware(CheckAccountStatus::class);
     Route::get('/sharedLinks' , [LinksController::class , 'showSharedLinks'])->middleware(CheckAccountStatus::class);
+    Route::get('/admin/dashboard' , [AdminController::class , 'index'])->middleware(CheckAccountStatus::class)->middleware(CheckAccountRole::class);
 
     //post
     Route::post('/logout' , [authController::class , "logout"])->name('auth.logout');
