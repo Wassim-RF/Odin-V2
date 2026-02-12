@@ -54,7 +54,7 @@ class LinksController extends Controller
 
     public function destroy(Request $request , LinksServices $linksServices , Links $links) {
         if($request->link_id) {
-            $this->authorize('delete' , $links);
+            // $this->authorize('delete' , $links);
             $linksServices->deleteLink($request->link_id);
             return redirect()->back();
         }

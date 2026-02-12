@@ -1,6 +1,7 @@
 <?php
     namespace App\Services;
 
+    use App\Models\ActivityLog;
     use App\Models\User;
     use App\Models\Categories;
 
@@ -10,6 +11,11 @@
         }
 
         public function createCategorie(array $data) {
+            ActivityLog::create([
+                'user_id' => auth()->user()->id,
+                'action' => "add",
+                'subject_type' => "categorie"
+            ]);
             return Categories::create($data);
         }
         
@@ -18,10 +24,20 @@
         }
 
         public function updateCategorie(int $id , array $data) {
+            ActivityLog::create([
+                'user_id' => auth()->user()->id,
+                'action' => "update",
+                'subject_type' => "categorie"
+            ]);
             return Categories::find($id)->update($data);
         }
 
         public function deleteCategorie(int $id) {
+            ActivityLog::create([
+                'user_id' => auth()->user()->id,
+                'action' => "delete",
+                'subject_type' => "categorie"
+            ]);
             return Categories::find($id)->delete();
         }
 

@@ -1,6 +1,7 @@
 <?php
     namespace App\Services;
 
+    use App\Models\ActivityLog;
     use App\Models\User;
     use App\Models\Links;
 
@@ -19,6 +20,12 @@
                 'permission' => 'editor'
             ];
 
+            ActivityLog::create([
+                'user_id' => auth()->user()->id,
+                'action' => "add",
+                'subject_type' => "link"
+            ]);
+
             \DB::table('link_users')->insert($linkUserData);
             return $link;
         }
@@ -28,10 +35,20 @@
         }
 
         public function deleteLink(int $id) {
+            ActivityLog::create([
+                'user_id' => auth()->user()->id,
+                'action' => "delete",
+                'subject_type' => "link"
+            ]);
             return Links::find($id)->delete();
         }
 
         public function updateLink(int $id , array $data) {
+            ActivityLog::create([
+                'user_id' => auth()->user()->id,
+                'action' => "update",
+                'subject_type' => "link"
+            ]);
             return Links::find($id)->update($data);
         }
 
