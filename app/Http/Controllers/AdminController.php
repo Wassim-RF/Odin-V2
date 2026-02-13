@@ -96,4 +96,9 @@ class AdminController extends Controller
 
         return view('admin.dashboard' , compact('userCount' , 'categoriesCount' , 'linksCount' , 'tagsCount' , 'lastFiveUser' , 'activityIcons' , 'activityColors' , 'lastFiveActivity' , 'activityTitles'));
     }
+
+    public function showUsers(AdminServices $adminServices) {
+        $usersPagination = $adminServices->getUsersByPagination();
+        return view('admin.utilisateur' , compact('usersPagination'));
+    }
 }

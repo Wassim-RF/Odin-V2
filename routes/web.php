@@ -33,6 +33,7 @@ Route::middleware(Authenticate::class)->group(function () {
     Route::get('/tags' , [TagsController::class , 'index'])->middleware(CheckAccountStatus::class);
     Route::get('/sharedLinks' , [LinksController::class , 'showSharedLinks'])->middleware(CheckAccountStatus::class);
     Route::get('/admin/dashboard' , [AdminController::class , 'index'])->middleware(CheckAccountStatus::class)->middleware(CheckAccountRole::class);
+    Route::get('/admin/users' , [AdminController::class , 'showUsers'])->middleware(CheckAccountStatus::class)->middleware(CheckAccountRole::class);
 
     //post
     Route::post('/logout' , [authController::class , "logout"])->name('auth.logout');

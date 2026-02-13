@@ -88,7 +88,7 @@
                     @forelse ($lastFiveActivity as $activity)
                         @include('components.admin.activity')
                     @empty
-                        
+                        <p>Acune activite existes.</p>
                     @endforelse
                 </div>
             </div>

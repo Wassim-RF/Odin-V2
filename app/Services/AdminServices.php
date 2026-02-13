@@ -71,4 +71,10 @@
 
         //     return "$userName a {$actions[$action]} $type \"$label\"";
         // }
+
+        public function getUsersByPagination() {
+            $users = User::paginate(10);
+
+            return $users;
+        }
     }
