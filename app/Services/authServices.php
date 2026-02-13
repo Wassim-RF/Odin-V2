@@ -13,7 +13,8 @@
             ActivityLog::create([
                 'user_id' => $user->id,
                 'action' => "register",
-                'subject_type' => "account"
+                'subject_type' => "account",
+                'subject_id' => $user->id
             ]);
             return $user;
         }

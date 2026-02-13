@@ -16,6 +16,7 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->enum('action' , ['add' , 'delete' , 'update' , 'register' , 'share' , 'restore']);
             $table->enum('subject_type' , ['link' , 'categorie' , 'account' , 'tag']);
+            $table->integer('subject_id');
             $table->timestamps();
         });
     }

@@ -23,7 +23,8 @@
             ActivityLog::create([
                 'user_id' => auth()->user()->id,
                 'action' => "add",
-                'subject_type' => "link"
+                'subject_type' => "link",
+                'subject_id' => $link->id
             ]);
 
             \DB::table('link_users')->insert($linkUserData);
@@ -35,21 +36,25 @@
         }
 
         public function deleteLink(int $id) {
+            $link = Links::find($id)->delete();
             ActivityLog::create([
                 'user_id' => auth()->user()->id,
                 'action' => "delete",
-                'subject_type' => "link"
+                'subject_type' => "link",
+                'subject_id' => $link->id
             ]);
-            return Links::find($id)->delete();
+            return ;
         }
 
         public function updateLink(int $id , array $data) {
+            $link = Links::find($id)->update($data);
             ActivityLog::create([
                 'user_id' => auth()->user()->id,
                 'action' => "update",
-                'subject_type' => "link"
+                'subject_type' => "link",
+                'subject_id' => $link->id
             ]);
-            return Links::find($id)->update($data);
+            return $link;
         }
 
         public function getUserLinksFiltered($search = null, $category = null, $tag = null) {

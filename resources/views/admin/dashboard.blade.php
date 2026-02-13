@@ -77,17 +77,6 @@
                             @foreach ($lastFiveUser as $user)
                                 @include('components.admin.user')
                             @endforeach
-                            {{-- <tr class="hover:bg-slate-50/30 transition-colors">
-                                <td class="px-8 py-4">
-                                    <div class="flex items-center gap-3">
-                                        <img src="https://ui-avatars.com/api/?name=Sami+R&background=0ea5e9&color=fff" class="w-8 h-8 rounded-full shadow-sm" alt="">
-                                        <span class="text-sm font-bold text-slate-700">Sami Rayan</span>
-                                    </div>
-                                </td>
-                                <td class="px-8 py-4 text-sm text-slate-500">sami@example.com</td>
-                                <td class="px-8 py-4"><span class="px-2 py-0.5 text-[10px] font-bold bg-rose-100 text-rose-600 rounded-md">Admin</span></td>
-                                <td class="px-8 py-4 text-sm text-slate-400">Hier, 18:45</td>
-                            </tr> --}}
                         </tbody>
                     </table>
                 </div>
@@ -96,31 +85,11 @@
             <div class="bg-white rounded-4xl border border-slate-100 shadow-sm p-8">
                 <h3 class="font-black text-slate-900 tracking-tight mb-6">Activités Récentes</h3>
                 <div class="space-y-8 relative before:absolute before:inset-0 before:ml-4 before:-translate-x-px before:h-full before:w-0.5 before:bg-slate-200">
-                    @include('components.admin.activity')
-                    {{-- <div class="relative flex items-start gap-4">
-                        <div class="absolute left-0 mt-1.5 w-4 h-4 rounded-full bg-rose-500 border-4 border-white shadow-sm ring-1 ring-slate-100"></div>
-                        <div class="ml-8">
-                            <p class="text-sm font-bold text-slate-800 leading-tight">Nouveau lien ajouté</p>
-                            <p class="text-[11px] text-slate-400 font-medium">Par Mehdi dans "Design"</p>
-                            <span class="text-[10px] text-slate-400 italic">Il y a 10 min</span>
-                        </div>
-                    </div> --}}
-                    {{-- <div class="relative flex items-start gap-4">
-                        <div class="absolute left-0 mt-1.5 w-4 h-4 rounded-full bg-emerald-500 border-4 border-white shadow-sm ring-1 ring-slate-100"></div>
-                        <div class="ml-8">
-                            <p class="text-sm font-bold text-slate-800 leading-tight">Nouveau Tag #OdinAI</p>
-                            <p class="text-[11px] text-slate-400 font-medium">Créé par le système</p>
-                            <span class="text-[10px] text-slate-400 italic">Il y a 1 heure</span>
-                        </div>
-                    </div>
-                    <div class="relative flex items-start gap-4">
-                        <div class="absolute left-0 mt-1.5 w-4 h-4 rounded-full bg-blue-500 border-4 border-white shadow-sm ring-1 ring-slate-100"></div>
-                        <div class="ml-8">
-                            <p class="text-sm font-bold text-slate-800 leading-tight">Catégorie modifiée</p>
-                            <p class="text-[11px] text-slate-400 font-medium">Sami a mis à jour "Tutoriels"</p>
-                            <span class="text-[10px] text-slate-400 italic">Il y a 3 heures</span>
-                        </div>
-                    </div> --}}
+                    @forelse ($lastFiveActivity as $activity)
+                        @include('components.admin.activity')
+                    @empty
+                        
+                    @endforelse
                 </div>
             </div>
 

@@ -11,12 +11,14 @@
         }
 
         public function createCategorie(array $data) {
+            $categorie = Categories::create($data);
             ActivityLog::create([
                 'user_id' => auth()->user()->id,
                 'action' => "add",
-                'subject_type' => "categorie"
+                'subject_type' => "categorie",
+                'subject_id' => $categorie->id
             ]);
-            return Categories::create($data);
+            return $categorie;
         }
         
         public function getUserCategorie() {
@@ -24,21 +26,25 @@
         }
 
         public function updateCategorie(int $id , array $data) {
+            $categorie = Categories::find($id)->update($data);
             ActivityLog::create([
                 'user_id' => auth()->user()->id,
                 'action' => "update",
-                'subject_type' => "categorie"
+                'subject_type' => "categorie",
+                'subject_id' => $categorie->id
             ]);
-            return Categories::find($id)->update($data);
+            return $categorie;
         }
 
         public function deleteCategorie(int $id) {
+            $categorie = Categories::find($id)->delete();
             ActivityLog::create([
                 'user_id' => auth()->user()->id,
                 'action' => "delete",
-                'subject_type' => "categorie"
+                'subject_type' => "categorie",
+                'subject_id' => $categorie->id
             ]);
-            return Categories::find($id)->delete();
+            return $categorie;
         }
 
         public function getCategorieByTitle(int $id) {

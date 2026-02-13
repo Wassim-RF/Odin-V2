@@ -10,20 +10,24 @@
         }
 
         public function createTag(array $data) {
+            $tag = Tags::create($data);
             ActivityLog::create([
                 'user_id' => auth()->user()->id,
                 'action' => "add",
-                'subject_type' => "tag"
+                'subject_type' => "tag",
+                'subject_id' => $tag->id
             ]);
-            return Tags::create($data);
+            return $tag;
         }
 
         public function deleteTag(int $id) {
+            $tag = Tags::find($id)->delete();
             ActivityLog::create([
                 'user_id' => auth()->user()->id,
                 'action' => "delete",
-                'subject_type' => "tag"
+                'subject_type' => "tag",
+                'subject_id' => $tag->id
             ]);
-            return Tags::find($id)->delete();
+            return $tag;
         }
     }

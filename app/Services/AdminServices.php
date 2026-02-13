@@ -1,6 +1,8 @@
 <?php
     namespace App\Services;
 
+    use App;
+    use App\Models\ActivityLog;
     use App\Models\Categories;
     use App\Models\Links;
     use App\Models\Tags;
@@ -25,5 +27,9 @@
 
         public function lastFiveUser() {
             return User::latest()->limit(5)->get();
+        }
+
+        public function lastFiveActivity() {
+            return ActivityLog::latest()->limit(5)->get();
         }
     }
