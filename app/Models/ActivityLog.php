@@ -30,28 +30,9 @@ class ActivityLog extends Model
             $user = User::find($userId);
             $userName = $user ? $user->name : 'Utilisateur inconnu';
 
-            $subjectModel = null;
-            switch($subject_type) {
-                case 'link':
-                    $subjectModel = Links::find($subject_id);
-                    break;
-                case 'categorie':
-                    $subjectModel = Categories::find($subject_id);
-                    break;
-                case 'tag':
-                    $subjectModel = Tags::find($subject_id);
-                    break;
-            }
-
-            if ($subjectModel) {
-                $label = $subjectModel->title ?? $subjectModel->name ?? 'élément';
-            } else {
-                $label = '';
-            }
-
             $type = $subject_type;
 
-            return "$userName a {$actions[$action]} un(e) $type \"$label\"";
+            return "$userName a {$actions[$action]} $type.";
         }
 
 }

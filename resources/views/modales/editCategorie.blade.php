@@ -38,7 +38,7 @@
                     <span>Description</span>
                     <span class="text-amber-500">*</span>
                 </label>
-                <textarea id="edit_categorie_description" name="categorie_description" rows="3" required
+                <textarea id="edit_categorie_description" name="categorie_description" rows="3"
                     class="block w-full rounded-2xl border-slate-200 border bg-slate-50/50 px-4 py-3.5 text-slate-900 placeholder:text-slate-400 focus:bg-white focus:border-amber-500 focus:ring-4 focus:ring-amber-500/10 transition-all outline-none text-sm font-medium resize-none" 
                     placeholder="Mettre à jour la description..."></textarea>
             </div>

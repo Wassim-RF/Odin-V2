@@ -26,25 +26,23 @@
         }
 
         public function updateCategorie(int $id , array $data) {
-            $categorie = Categories::find($id)->update($data);
             ActivityLog::create([
                 'user_id' => auth()->user()->id,
                 'action' => "update",
                 'subject_type' => "categorie",
-                'subject_id' => $categorie->id
+                'subject_id' => $id
             ]);
-            return $categorie;
+            return Categories::find($id)->update($data);
         }
 
         public function deleteCategorie(int $id) {
-            $categorie = Categories::find($id)->delete();
             ActivityLog::create([
                 'user_id' => auth()->user()->id,
                 'action' => "delete",
                 'subject_type' => "categorie",
-                'subject_id' => $categorie->id
+                'subject_id' => $id
             ]);
-            return $categorie;
+            return Categories::find($id)->delete();
         }
 
         public function getCategorieByTitle(int $id) {
