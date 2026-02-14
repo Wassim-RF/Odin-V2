@@ -61,7 +61,7 @@
             <div class="lg:col-span-2 bg-white rounded-4xl border border-slate-100 shadow-sm overflow-hidden">
                 <div class="px-8 py-6 border-b border-slate-50 flex justify-between items-center">
                     <h3 class="font-black text-slate-900 tracking-tight">Derniers Utilisateurs</h3>
-                    <a href="#" class="text-xs font-bold text-rose-500 hover:bg-rose-50 px-3 py-1.5 rounded-lg transition-colors">Voir tout</a>
+                    <a href="/admin/users" class="text-xs font-bold text-rose-500 hover:bg-rose-50 px-3 py-1.5 rounded-lg transition-colors">Voir tout</a>
                 </div>
                 <div class="overflow-x-auto">
                     <table class="w-full text-left border-collapse">

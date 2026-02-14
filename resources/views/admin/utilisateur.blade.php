@@ -15,7 +15,7 @@
             </button>
         </div>
 
-        <div class="bg-white p-4 rounded-3xl border border-slate-100 shadow-sm flex flex-col md:flex-row justify-between gap-4">
+        <form method="GET" class="bg-white p-4 rounded-3xl border border-slate-100 shadow-sm flex flex-col md:flex-row justify-between gap-4">
             <div class="relative w-full md:w-96">
                 <svg class="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
                 <input type="text" placeholder="Rechercher par nom, email..." class="w-full pl-12 pr-4 py-3 bg-slate-50 border-none rounded-xl text-sm font-semibold text-slate-700 placeholder-slate-400 focus:ring-2 focus:ring-rose-500 focus:bg-white transition-all">
@@ -27,7 +27,7 @@
                     <option>Utilisateur</option>
                 </select>
             </div>
-        </div>
+        </form>
 
         <div class="bg-white rounded-4xl border border-slate-100 shadow-sm overflow-hidden">
             <div class="overflow-x-auto">

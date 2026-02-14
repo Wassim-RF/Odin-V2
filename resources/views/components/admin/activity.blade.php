@@ -9,7 +9,7 @@
                 <p class="text-sm font-bold text-slate-800">{{ $activityTitles[$activity->action][$activity->subject_type] }}</p>
                 <p class="text-[11px] text-slate-500 font-medium">{{ $activity->getMessageAttribute($activity->user_id , $activity->subject_type , $activity->subject_id , $activity->action) }}</p>
             </div>
-            <span class="text-[10px] text-slate-400 whitespace-nowrap">Il y a 2 min</span>
+            <span class="text-[10px] text-slate-400 whitespace-nowrap">{{ $activity->created_at->diffForHumans() }}</span>
         </div>
     </div>
 </div>
