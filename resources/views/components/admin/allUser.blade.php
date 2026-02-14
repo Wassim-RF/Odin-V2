@@ -41,12 +41,22 @@
     </td>
     <td class="px-8 py-4 text-right">
         @if ($user->roles->first()->name !== 'admin')
-            <button class="text-xs font-bold text-slate-400 hover:text-slate-900 bg-white hover:bg-slate-100 border border-slate-200 px-3 py-1.5 rounded-lg transition-all mr-2">
-                Éditer
-            </button>
-            <button class="text-xs font-bold text-rose-500 hover:text-rose-700 bg-rose-50 hover:bg-rose-100 border border-rose-100 px-3 py-1.5 rounded-lg transition-all">
-                Désactiver
-            </button>
+            @if ($user->is_active)
+                <button class="text-xs font-bold text-slate-400 hover:text-slate-900 bg-white hover:bg-slate-100 border border-slate-200 px-3 py-1.5 rounded-lg transition-all mr-2">
+                    Éditer
+                </button>
+                <form action="{{ route('user.desactive') }}" method="POST" class="inline-block">
+                    @csrf
+                    <input type="hidden" name="user_id" value="{{ $user->id }}">
+                    <button class="text-xs font-bold text-rose-500 hover:text-rose-700 bg-rose-50 hover:bg-rose-100 border border-rose-100 px-3 py-1.5 rounded-lg transition-all">
+                        Désactiver
+                    </button>
+                </form>
+            @else
+                <button class="text-xs font-bold text-emerald-600 hover:text-emerald-700 bg-emerald-50 hover:bg-emerald-100 border border-emerald-100 px-3 py-1.5 rounded-lg transition-all">
+                    Réactiver
+                </button>
+            @endif
         @endif
     </td>
 </tr>

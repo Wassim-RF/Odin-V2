@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Services\AdminServices;
+use App\Services\userServices;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
@@ -100,5 +101,11 @@ class AdminController extends Controller
     public function showUsers(AdminServices $adminServices) {
         $usersPagination = $adminServices->getUsersByPagination();
         return view('admin.utilisateur' , compact('usersPagination'));
+    }
+
+    public function desactiveUSer(userServices $userServices , Request $request) {
+        $userServices->disactiveUser((int) $request->user_id);
+
+        return redirect()->back();
     }
 }

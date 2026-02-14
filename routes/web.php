@@ -24,16 +24,14 @@ Route::post('/register' , [authController::class , "register"])->name('auth.regi
 
 
 /* Private */ 
-Route::middleware(Authenticate::class)->group(function () {
+Route::middleware(Authenticate::class)->middleware(CheckAccountStatus::class)->group(function () {
     //get
-    Route::get('/home' , [userController::class , 'showHome'])->middleware(CheckAccountStatus::class);
-    Route::get('/categories' , [CategoriesController::class , 'index'])->middleware(CheckAccountStatus::class)->name('categories.index');
-    Route::get('/categorie/{id}' , [CategoriesController::class , 'showCategorie'])->middleware(CheckAccountStatus::class);
-    Route::get('/links' , [LinksController::class , 'index'])->middleware(CheckAccountStatus::class)->name('links.index');
-    Route::get('/tags' , [TagsController::class , 'index'])->middleware(CheckAccountStatus::class);
-    Route::get('/sharedLinks' , [LinksController::class , 'showSharedLinks'])->middleware(CheckAccountStatus::class);
-    Route::get('/admin/dashboard' , [AdminController::class , 'index'])->middleware(CheckAccountStatus::class)->middleware(CheckAccountRole::class);
-    Route::get('/admin/users' , [AdminController::class , 'showUsers'])->middleware(CheckAccountStatus::class)->middleware(CheckAccountRole::class);
+    Route::get('/home' , [userController::class , 'showHome']);
+    Route::get('/categories' , [CategoriesController::class , 'index'])->name('categories.index');
+    Route::get('/categorie/{id}' , [CategoriesController::class , 'showCategorie']);
+    Route::get('/links' , [LinksController::class , 'index'])->name('links.index');
+    Route::get('/tags' , [TagsController::class , 'index']);
+    Route::get('/sharedLinks' , [LinksController::class , 'showSharedLinks']);
 
     //post
     Route::post('/logout' , [authController::class , "logout"])->name('auth.logout');
@@ -51,4 +49,14 @@ Route::middleware(Authenticate::class)->group(function () {
     Route::delete('/deleteCategorie' , [CategoriesController::class , 'destroy'])->name('delete.categorie');
     Route::delete('/deleteLink' , [LinksController::class , 'destroy'])->name('delete.link');
     Route::delete('/deleteTag' , [TagsController::class , 'destroy'])->name('delete.tag');
+
+    //Admin
+    Route::middleware(CheckAccountRole::class)->group(function () {
+        //get
+        Route::get('/admin/dashboard' , [AdminController::class , 'index']);
+        Route::get('/admin/users' , [AdminController::class , 'showUsers']);
+
+        //post
+        Route::post('/desactiveUser' , [AdminController::class , 'desactiveUSer'])->name('user.desactive');
+    });
 });
