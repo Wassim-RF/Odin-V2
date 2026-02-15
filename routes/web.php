@@ -55,6 +55,7 @@ Route::middleware(Authenticate::class)->middleware(CheckAccountStatus::class)->g
         //get
         Route::get('/admin/dashboard' , [AdminController::class , 'index']);
         Route::get('/admin/users' , [AdminController::class , 'showUsers']);
+        Route::get('/admin/logs' , [AdminController::class , 'showLogs']);
 
         //post
         Route::post('/desactiveUser' , [AdminController::class , 'desactiveUSer'])->name('user.desactive');

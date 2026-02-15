@@ -99,8 +99,13 @@ class AdminController extends Controller
     }
 
     public function showUsers(AdminServices $adminServices) {
+        $userCount = $adminServices->usersCount();
         $usersPagination = $adminServices->getUsersByPagination();
-        return view('admin.utilisateur' , compact('usersPagination'));
+        return view('admin.utilisateur' , compact('usersPagination' , 'userCount'));
+    }
+
+    public function showLogs() {
+        return view('admin.logs');
     }
 
     public function desactiveUSer(userServices $userServices , Request $request) {

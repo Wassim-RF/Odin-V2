@@ -118,7 +118,7 @@
             </div>
 
             <div class="px-8 py-6 border-t border-slate-50 flex justify-between items-center">
-                <p class="text-xs font-bold text-slate-400">Affichage de 1 à 3 sur 12 utilisateurs</p>
+                <p class="text-xs font-bold text-slate-400">Affichage de 1 à 3 sur {{ $userCount }} utilisateurs</p>
                 <div class="flex gap-2">
                     <button class="px-3 py-1.5 text-xs font-bold text-slate-400 hover:text-slate-600 bg-slate-50 rounded-lg hover:bg-slate-100 transition-colors" disabled>Précédent</button>
                     <button class="px-3 py-1.5 text-xs font-bold text-slate-600 hover:text-slate-900 bg-white border border-slate-200 rounded-lg hover:bg-slate-50 transition-colors shadow-sm">Suivant</button>

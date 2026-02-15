@@ -58,7 +58,7 @@
 
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
             
-            <div class="lg:col-span-2 bg-white rounded-4xl border border-slate-100 shadow-sm overflow-hidden">
+            <div class="lg:col-span-2 bg-white rounded-4xl border border-slate-100 shadow-sm overflow-hidden self-start">
                 <div class="px-8 py-6 border-b border-slate-50 flex justify-between items-center">
                     <h3 class="font-black text-slate-900 tracking-tight">Derniers Utilisateurs</h3>
                     <a href="/admin/users" class="text-xs font-bold text-rose-500 hover:bg-rose-50 px-3 py-1.5 rounded-lg transition-colors">Voir tout</a>
@@ -82,7 +82,7 @@
                 </div>
             </div>
 
-            <div class="bg-white rounded-4xl border border-slate-100 shadow-sm p-8">
+            <div class="bg-white rounded-4xl border border-slate-100 shadow-sm p-8 self-start">
                 <h3 class="font-black text-slate-900 tracking-tight mb-6">Activités Récentes</h3>
                 <div class="space-y-8 relative before:absolute before:inset-0 before:ml-4 before:-translate-x-px before:h-full before:w-0.5 before:bg-slate-200">
                     @forelse ($lastFiveActivity as $activity)
