@@ -1,59 +1,172 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+🦅 Odin - Plateforme de Gestion de Ressources (V2)
+Odin est une application web collaborative permettant de centraliser, organiser et partager des ressources numériques (liens). Conçue pour valider des compétences avancées en développement Backend avec Laravel, l'application respecte les principes SOLID (notamment SRP via une couche Services), une gestion fine des droits (RBAC) et une sécurisation optimale.
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+📑 Table des Matières
+Contexte et Objectifs
 
-## About Laravel
+Fonctionnalités Clés
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+Architecture Technique
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+Modèle de Données (MPD)
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+Installation et Configuration
 
-## Learning Laravel
+Arborescence du Projet
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+🎯 Contexte et Objectifs
+Ce projet a été réalisé dans le cadre de la certification "Développeur Web et Web Mobile". Il vise à valider la maîtrise de :
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+L'authentification et la sécurisation par Middlewares.
 
-## Laravel Sponsors
+L'architecture MVC étendue avec des Services.
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+L'ORM Eloquent (Relations One-to-Many, Many-to-Many, Polymorphisme).
 
-### Premium Partners
+La gestion des autorisations via Policies et Gates.
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+Le déploiement sur environnement Linux.
 
-## Contributing
+🚀 Fonctionnalités Clés
+🔐 Authentification & Sécurité (US-01, US-02)
+Inscription et Connexion sécurisées.
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+Middleware CheckAccountStatus : Blocage automatique des utilisateurs dont le compte est désactivé (is_active = false).
 
-## Code of Conduct
+Middleware CheckAccountRole : Protection des routes d'administration.
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+📚 Gestion des Ressources (US-03, US-04, US-05, US-10)
+CRUD complet sur les Catégories et les Liens.
 
-## Security Vulnerabilities
+Système de Tags (Many-to-Many).
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+Soft Deletes : Suppression logique des ressources avec possibilité de restauration par l'admin.
 
-## License
+Validation avancée des formulaires via Form Requests.
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+👥 Rôles & Permissions (US-07)
+Système RBAC (Role-Based Access Control) avec 3 niveaux :
+
+Admin : Accès total, gestion des utilisateurs, accès aux logs.
+
+Editor : Gestion complète de ses propres ressources.
+
+Viewer : Lecture uniquement.
+
+🤝 Partage & Collaboration (US-08, US-12)
+Partage de liens avec d'autres utilisateurs via une table pivot avec attributs (permissions : lecture ou édition).
+
+Gestion des Favoris.
+
+🔍 Recherche & Suivi (US-06, US-09, US-13)
+Filtrage par catégorie et tags.
+
+Activity Logs : Historique des actions critiques (création, modification, suppression) accessible à l'administrateur.
+
+Notifications : Alertes lors d'un partage de lien.
+
+🏗 Architecture Technique
+Le projet suit une architecture stricte pour respecter le Single Responsibility Principle (SRP). La logique métier est déportée des contrôleurs vers des Services.
+
+PHP
+app/
+├── Http/Controllers/   # Gestion des requêtes et réponses HTTP uniquement
+├── Services/           # Logique métier (Business Logic)
+├── Requests/           # Validation des données entrantes
+├── Policies/           # Logique d'autorisation
+└── Models/             # Représentation des données Eloquent
+Technologies utilisées
+Framework : Laravel 10/11
+
+Base de données : MySQL 8.0
+
+Frontend : Blade Components, Vanilla JS (Modales, AJAX), CSS personnalisé.
+
+Build Tool : Vite.
+
+🗄 Modèle de Données (MPD)
+La base de données contient plus de 10 tables interconnectées :
+
+Utilisateurs & Rôles : users, roles, role_user (pivot).
+
+Ressources : categories, links.
+
+Taxonomie : tags, link_tag (pivot).
+
+Social : favorites (pivot), link_user (pivot partage avec droits).
+
+Système : activity_logs.
+
+🛠 Installation et Configuration
+Prérequis
+PHP 8.2+
+
+Composer
+
+MySQL
+
+Node.js & NPM
+
+Étapes d'installation
+Cloner le dépôt
+
+Bash
+git clone https://github.com/ton-username/odin-v2.git
+cd odin-v2
+Installer les dépendances PHP et JS
+
+Bash
+composer install
+npm install
+Configuration de l'environnement
+Dupliquez le fichier .env.example et renommez-le en .env. Configurez votre base de données :
+
+Code snippet
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=odin_db
+DB_USERNAME=root
+DB_PASSWORD=
+Générer la clé d'application
+
+Bash
+php artisan key:generate
+Migrations et Seeders
+Lancez les migrations et alimentez la base avec les données de test (Admin, Roles, etc.) :
+
+Bash
+php artisan migrate --seed
+Note : Le DatabaseSeeder lance automatiquement AdminSeeder et RoleSeeder.
+
+Lancer l'application
+
+Bash
+npm run build
+php artisan serve
+📂 Structure des dossiers (Extrait)
+Odin V2/
+├── app/
+│   ├── Http/
+│   │   ├── Controllers/    # Admin, Auth, Categories, Links, etc.
+│   │   ├── Middleware/     # CheckAccountRole, CheckAccountStatus
+│   │   └── Requests/       # Validation (LoginRequest, linkRequest...)
+│   ├── Models/             # ActivityLog, Link, User...
+│   └── Services/           # AdminServices, authServices, linksServices...
+├── database/
+│   ├── migrations/         # Définition du schéma SGBD
+│   └── seeders/            # Jeux de données initiaux
+├── resources/
+│   ├── views/
+│   │   ├── admin/          # Dashboard admin & logs
+│   │   ├── components/     # Composants Blade réutilisables
+│   │   ├── modales/        # Modales d'ajout/édition
+│   │   └── layouts/        # Structures de pages
+└── public/
+    └── js/                 # Scripts JS (Gestion modales, events)
+👤 Auteur
+Hamza BOUCHIKHI
+
+Projet réalisé dans le cadre de la formation Développeur Web.
+
+Date de création : Février 2026.
